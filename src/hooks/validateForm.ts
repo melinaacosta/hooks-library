@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface FieldValidation {
   required?: boolean;
@@ -22,11 +22,12 @@ export const useFormValidation = (validationRules: FormValidation) => {
   const [values, setValues] = useState<{ [key: string]: string }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
     validateField(name, value);
   };
+
 
   const validateField = (fieldName: string, value: string) => {
     const rules = validationRules[fieldName];
